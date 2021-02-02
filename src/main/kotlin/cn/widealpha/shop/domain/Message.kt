@@ -1,4 +1,4 @@
-package cn.widealpha.shop.model
+package cn.widealpha.shop.domain
 
 import java.sql.Timestamp
 

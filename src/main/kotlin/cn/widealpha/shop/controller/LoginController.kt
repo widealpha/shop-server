@@ -1,6 +1,6 @@
 package cn.widealpha.shop.controller
 
-import cn.widealpha.shop.model.Result
+import cn.widealpha.shop.domain.Result
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 

@@ -1,0 +1,41 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="kotlin" targetRuntime="MyBatis3Kotlin">
+        <jdbcConnection
+                driverClass="com.mysql.cj.jdbc.Driver"
+                connectionURL="jdbc:mysql://127.0.0.1:3306/shop?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8"
+                userId="root"
+                password="%Kmh123456"/>
+        <javaModelGenerator targetPackage="cn.widealpha.shop.domain" targetProject="src/main/kotlin"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.widealpha.shop.dao" targetProject="src/main/kotlin"/>
+
+        <table tableName="user_info"
+               domainObjectName="UserInfo"
+               enableSelectByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableInsert="true"/>
+        <table tableName="chat_message"
+               domainObjectName="ChatMessage"
+               enableSelectByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableInsert="true"/>
+        <table tableName="user"
+               domainObjectName="User"
+               enableSelectByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableInsert="true"/>
+        <table tableName="commodity"
+               domainObjectName="Commodity"
+               enableSelectByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableInsert="true"/>
+
+    </context>
+</generatorConfiguration>
