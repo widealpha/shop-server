@@ -15,10 +15,34 @@
     <name>shop</name>
     <description>A simple kotlin shop server.</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <kotlin.version>1.3.72</kotlin.version>
     </properties>
     <dependencies>
+<!--        java ee的包-->
+<!--        <dependency>-->
+<!--            <groupId>javax.xml.bind</groupId>-->
+<!--            <artifactId>jaxb-api</artifactId>-->
+<!--            <version>2.3.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.sun.xml.bind</groupId>-->
+<!--            <artifactId>jaxb-impl</artifactId>-->
+<!--            <version>2.3.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.sun.xml.bind</groupId>-->
+<!--            <artifactId>jaxb-core</artifactId>-->
+<!--            <version>2.3.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>javax.activation</groupId>-->
+<!--            <artifactId>activation</artifactId>-->
+<!--            <version>1.1.1</version>-->
+<!--        </dependency>-->
+<!--        java ee的包-->
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -92,6 +116,17 @@
             <artifactId>mybatis-generator-maven-plugin</artifactId>
             <version>1.4.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis.dynamic-sql</groupId>
+            <artifactId>mybatis-dynamic-sql</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -139,24 +174,8 @@
                     <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
+                    <includeAllDependencies>true</includeAllDependencies>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.mybatis.generator</groupId>
-                        <artifactId>mybatis-generator-core</artifactId>
-                        <version>1.4.0</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>8.0.22</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.mybatis</groupId>
-                        <artifactId>mybatis</artifactId>
-                        <version>3.5.6</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
