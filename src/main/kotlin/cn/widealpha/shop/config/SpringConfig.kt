@@ -1,6 +1,5 @@
 package cn.widealpha.shop.config
 
-import cn.widealpha.shop.config.interceptor.TokenInterceptor
 import org.springframework.boot.SpringBootConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ImportResource

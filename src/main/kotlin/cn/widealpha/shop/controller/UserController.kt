@@ -3,6 +3,7 @@ package cn.widealpha.shop.controller
 import cn.widealpha.shop.entity.ResultEntity
 import cn.widealpha.shop.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 
@@ -25,12 +26,16 @@ class UserController {
 
     @PostMapping("/changePassword")
     fun changePassword(password: String, newPassword: String): ResultEntity {
-        val account = SecurityContextHolder.getContext().authentication.name
-        return userService.changePassword(account, password, newPassword)
+        return userService.changePassword(password, newPassword)
     }
 
-    @PostMapping("/logout")
-    fun logout(): ResultEntity {
-        return userService.logout()
+    @PostMapping("/changeUsername")
+    fun changeUsername(newUsername: String): ResultEntity {
+        return userService.changeUsername(newUsername)
+    }
+
+    @PostMapping("/username")
+    fun getUsername(): ResultEntity {
+        return userService.getUsername()
     }
 }

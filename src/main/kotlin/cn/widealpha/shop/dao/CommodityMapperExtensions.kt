@@ -1,10 +1,11 @@
 /*
  * Auto-generated file. Created by MyBatis Generator
- * Generation date: 2021-02-05T01:47:03.1116241+08:00
+ * Generation date: 2021-02-07T02:30:40.18+08:00
  */
 package cn.widealpha.shop.dao
 
 import cn.widealpha.shop.dao.CommodityDynamicSqlSupport.Commodity
+import cn.widealpha.shop.dao.CommodityDynamicSqlSupport.Commodity.account
 import cn.widealpha.shop.dao.CommodityDynamicSqlSupport.Commodity.category
 import cn.widealpha.shop.dao.CommodityDynamicSqlSupport.Commodity.commodityId
 import cn.widealpha.shop.dao.CommodityDynamicSqlSupport.Commodity.description
@@ -12,6 +13,7 @@ import cn.widealpha.shop.dao.CommodityDynamicSqlSupport.Commodity.image
 import cn.widealpha.shop.dao.CommodityDynamicSqlSupport.Commodity.price
 import cn.widealpha.shop.dao.CommodityDynamicSqlSupport.Commodity.title
 import cn.widealpha.shop.domain.CommodityRecord
+import org.mybatis.dynamic.sql.SqlBuilder
 import org.mybatis.dynamic.sql.SqlBuilder.isEqualTo
 import org.mybatis.dynamic.sql.util.kotlin.*
 import org.mybatis.dynamic.sql.util.kotlin.mybatis3.*
@@ -35,6 +37,7 @@ fun CommodityMapper.insert(record: CommodityRecord) =
         map(price).toProperty("price")
         map(category).toProperty("category")
         map(image).toProperty("image")
+        map(account).toProperty("account")
     }
 
 fun CommodityMapper.insertMultiple(records: Collection<CommodityRecord>) =
@@ -45,6 +48,7 @@ fun CommodityMapper.insertMultiple(records: Collection<CommodityRecord>) =
         map(price).toProperty("price")
         map(category).toProperty("category")
         map(image).toProperty("image")
+        map(account).toProperty("account")
     }
 
 fun CommodityMapper.insertMultiple(vararg records: CommodityRecord) =
@@ -58,9 +62,10 @@ fun CommodityMapper.insertSelective(record: CommodityRecord) =
         map(price).toPropertyWhenPresent("price", record::price)
         map(category).toPropertyWhenPresent("category", record::category)
         map(image).toPropertyWhenPresent("image", record::image)
+        map(account).toPropertyWhenPresent("account", record::account)
     }
 
-private val columnList = listOf(commodityId, title, description, price, category, image)
+private val columnList = listOf(commodityId, title, description, price, category, image, account)
 
 fun CommodityMapper.selectOne(completer: SelectCompleter) =
     selectOne(this::selectOne, columnList, Commodity, completer)
@@ -76,6 +81,22 @@ fun CommodityMapper.selectByPrimaryKey(commodityId_: Int) =
         where(commodityId, isEqualTo(commodityId_))
     }
 
+fun CommodityMapper.selectAll() =
+    select {
+        allRows()
+    }
+
+fun CommodityMapper.selectMyAll(_account: String) =
+    select {
+        where(account, isEqualTo(_account))
+    }
+
+fun CommodityMapper.selectByKey(key: String) =
+    select {
+        where(title, SqlBuilder.isLike("%$key%"))
+    }
+
+
 fun CommodityMapper.update(completer: UpdateCompleter) =
     update(this::update, Commodity, completer)
 
@@ -87,6 +108,7 @@ fun KotlinUpdateBuilder.updateAllColumns(record: CommodityRecord) =
         set(price).equalTo(record::price)
         set(category).equalTo(record::category)
         set(image).equalTo(record::image)
+        set(account).equalTo(record::account)
     }
 
 fun KotlinUpdateBuilder.updateSelectiveColumns(record: CommodityRecord) =
@@ -97,6 +119,7 @@ fun KotlinUpdateBuilder.updateSelectiveColumns(record: CommodityRecord) =
         set(price).equalToWhenPresent(record::price)
         set(category).equalToWhenPresent(record::category)
         set(image).equalToWhenPresent(record::image)
+        set(account).equalToWhenPresent(record::account)
     }
 
 fun CommodityMapper.updateByPrimaryKey(record: CommodityRecord) =
@@ -106,6 +129,7 @@ fun CommodityMapper.updateByPrimaryKey(record: CommodityRecord) =
         set(price).equalTo(record::price)
         set(category).equalTo(record::category)
         set(image).equalTo(record::image)
+        set(account).equalTo(record::account)
         where(commodityId, isEqualTo(record::commodityId))
     }
 
@@ -116,5 +140,6 @@ fun CommodityMapper.updateByPrimaryKeySelective(record: CommodityRecord) =
         set(price).equalToWhenPresent(record::price)
         set(category).equalToWhenPresent(record::category)
         set(image).equalToWhenPresent(record::image)
+        set(account).equalToWhenPresent(record::account)
         where(commodityId, isEqualTo(record::commodityId))
     }

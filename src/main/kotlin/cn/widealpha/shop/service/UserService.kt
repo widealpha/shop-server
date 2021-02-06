@@ -1,6 +1,7 @@
 package cn.widealpha.shop.service
 
 import cn.widealpha.shop.dao.*
+import cn.widealpha.shop.domain.UserInfoRecord
 import cn.widealpha.shop.domain.UserRecord
 import cn.widealpha.shop.entity.ResultEntity
 import cn.widealpha.shop.util.JwtTokenUtil
@@ -11,7 +12,9 @@ import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.core.ValueOperations
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.authority.AuthorityUtils
+import org.springframework.security.core.context.SecurityContext
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -26,22 +29,19 @@ class UserService {
     lateinit var userMapper: UserMapper
 
     @Autowired
+    lateinit var userInfoMapper: UserInfoMapper
+
+    @Autowired
     lateinit var passwordEncoder: PasswordEncoder
 
     @Autowired
     lateinit var authenticationManager: AuthenticationManager
 
-    @Autowired
-    lateinit var request: HttpServletRequest
-
-    @Resource(name = "redisTemplate")
-    lateinit var valueOperations: ValueOperations<String, String>
-
     fun register(account: String, password: String, username: String?): ResultEntity {
         if (StringUtil.isEmpty(account, password)) {
             return ResultEntity.data("用户名或密码不能为空")
         }
-        var name = username;
+        var name = username
         if (name == null)
             name = UUID.randomUUID().toString().substring(0, 6)
         return try {
@@ -50,6 +50,11 @@ class UserService {
                     account = account,
                     username = name,
                     password = passwordEncoder.encode(password)
+                )
+            )
+            userInfoMapper.insertSelective(
+                UserInfoRecord(
+                    account = account
                 )
             )
             ResultEntity.data(result > 0)
@@ -65,12 +70,12 @@ class UserService {
             AuthorityUtils.commaSeparatedStringToAuthorityList("normal")
         )
         val auth = authenticationManager.authenticate(token)
-        SecurityContextHolder.getContext().authentication = auth;
+        SecurityContextHolder.getContext().authentication = auth
         return ResultEntity.data(JwtTokenUtil.createToken(account, "normal"))
     }
 
-    fun changePassword(account: String, password: String, newPassword: String): ResultEntity {
-        val userRecord = userMapper.selectByPrimaryKey(account) ?: return ResultEntity.error(-1, "用户不存在")
+    fun changePassword(password: String, newPassword: String): ResultEntity {
+        val userRecord = userMapper.selectByPrimaryKey(getCurrentAccount()) ?: return ResultEntity.error(-1, "用户不存在")
         return if (passwordEncoder.matches(password, userRecord.password)) {
             userRecord.password = passwordEncoder.encode(newPassword)
             val result = userMapper.updateByPrimaryKeySelective(userRecord)
@@ -80,10 +85,19 @@ class UserService {
         }
     }
 
-    fun logout(): ResultEntity {
-        val account = SecurityContextHolder.getContext().authentication.name
-        val tokenHeader = request.getHeader(JwtTokenUtil.TOKEN_HEADER)
-        valueOperations.set(tokenHeader, account, 14, TimeUnit.DAYS)
-        return ResultEntity.data(true)
+    fun changeUsername(newUsername: String): ResultEntity {
+        val userRecord = userMapper.selectByPrimaryKey(getCurrentAccount()) ?: return ResultEntity.error(-1, "用户不存在")
+        userRecord.username = newUsername
+        val result = userMapper.updateByPrimaryKeySelective(userRecord)
+        return ResultEntity.data(result > 0)
+    }
+
+    fun getUsername(): ResultEntity {
+        val userRecord = userMapper.selectByPrimaryKey(getCurrentAccount()) ?: return ResultEntity.error(-1, "用户不存在")
+        return ResultEntity.data(userRecord.username)
+    }
+
+    private fun getCurrentAccount(): String {
+        return SecurityContextHolder.getContext().authentication.name
     }
 }

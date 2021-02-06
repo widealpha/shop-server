@@ -154,7 +154,7 @@
                     <!--Location of configuration file -->
                     <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                     <verbose>true</verbose>
-                    <overwrite>false</overwrite>
+                    <overwrite>true</overwrite>
                     <includeAllDependencies>true</includeAllDependencies>
                 </configuration>
             </plugin>

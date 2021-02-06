@@ -1,6 +1,5 @@
 package cn.widealpha.shop.service
 
-import cn.widealpha.shop.dao.UserInfoMapper
 import cn.widealpha.shop.dao.UserMapper
 import cn.widealpha.shop.dao.selectByPrimaryKey
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service
 @Service
 class UserDetailService : UserDetailsService {
     @Autowired
-    lateinit var passwordEncoder: PasswordEncoder;
+    lateinit var passwordEncoder: PasswordEncoder
     @Autowired
     lateinit var userMapper: UserMapper
 

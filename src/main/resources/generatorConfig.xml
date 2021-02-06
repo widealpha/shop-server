@@ -46,5 +46,11 @@
                enableDeleteByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableInsert="true"/>
+        <table tableName="want"
+               domainObjectName="Want"
+               enableSelectByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableInsert="true"/>
     </context>
 </generatorConfiguration>

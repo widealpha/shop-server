@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 
-@Component
 class TokenInterceptor : HandlerInterceptorAdapter() {
     @Resource(name = "redisTemplate")
     lateinit var valueOperations: ValueOperations<String, String>
@@ -21,7 +20,7 @@ class TokenInterceptor : HandlerInterceptorAdapter() {
         if (valueOperations.get(request.getHeader(JwtTokenUtil.TOKEN_HEADER)) != null) {
             response.apply {
                 characterEncoding = "UTF-8"
-                setHeader("Content-type", "text/html;charset=UTF-8");
+                setHeader("Content-type", "text/html;charset=UTF-8")
                 writer.print(ResultEntity.error(-9, "token状态异常"))
             }
             return false

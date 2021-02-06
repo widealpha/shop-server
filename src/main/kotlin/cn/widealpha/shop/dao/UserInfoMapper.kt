@@ -1,6 +1,6 @@
 /*
  * Auto-generated file. Created by MyBatis Generator
- * Generation date: 2021-02-05T01:47:03.0960425+08:00
+ * Generation date: 2021-02-07T01:06:07.605+08:00
  */
 package cn.widealpha.shop.dao
 
@@ -41,13 +41,13 @@ interface UserInfoMapper {
 
     @SelectProvider(type=SqlProviderAdapter::class, method="select")
     @Results(id="UserInfoRecordResult", value = [
-        Result(column="info_id", property="infoId", jdbcType=JdbcType.INTEGER, id=true),
-        Result(column="account", property="account", jdbcType=JdbcType.VARCHAR),
+        Result(column="account", property="account", jdbcType=JdbcType.VARCHAR, id=true),
         Result(column="head_image", property="headImage", jdbcType=JdbcType.VARCHAR),
-        Result(column="sex", property="sex", jdbcType=JdbcType.INTEGER),
+        Result(column="age", property="age", jdbcType=JdbcType.INTEGER),
         Result(column="location", property="location", jdbcType=JdbcType.VARCHAR),
         Result(column="introduction", property="introduction", jdbcType=JdbcType.VARCHAR),
-        Result(column="age", property="age", jdbcType=JdbcType.INTEGER)
+        Result(column="sex", property="sex", jdbcType=JdbcType.INTEGER),
+        Result(column="name", property="name", jdbcType=JdbcType.VARCHAR)
     ])
     fun selectMany(selectStatement: SelectStatementProvider): List<UserInfoRecord>
 
