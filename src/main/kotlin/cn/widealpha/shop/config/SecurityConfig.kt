@@ -1,9 +1,8 @@
 package cn.widealpha.shop.config
 
 import cn.widealpha.shop.config.filter.JwtAuthenticationFilter
-import cn.widealpha.shop.config.handler.JwtAccessDeniedHandler
-import cn.widealpha.shop.config.handler.JwtAuthenticationEntryPoint
-import cn.widealpha.shop.config.handler.LoginAuthenticationFailureHandler
+import cn.widealpha.shop.config.handler.GlobalAccessDeniedHandler
+import cn.widealpha.shop.config.handler.GlobalAuthenticationEntryPoint
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -17,8 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
-        http.formLogin()
-            .failureHandler(LoginAuthenticationFailureHandler())
         //授权
         http.authorizeRequests()
             .antMatchers("/login", "/user/login", "/user/register", "/user/logout").permitAll()
@@ -28,8 +25,8 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 UsernamePasswordAuthenticationFilter::class.java
             )
             .exceptionHandling()
-            .accessDeniedHandler(JwtAccessDeniedHandler())
-            .authenticationEntryPoint(JwtAuthenticationEntryPoint())
+            .accessDeniedHandler(GlobalAccessDeniedHandler())
+            .authenticationEntryPoint(GlobalAuthenticationEntryPoint())
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         http.csrf().disable()
     }

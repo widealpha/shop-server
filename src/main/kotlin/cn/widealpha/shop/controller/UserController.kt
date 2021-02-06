@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 
+
 @RestController
 @RequestMapping("/user")
 class UserController {
@@ -26,5 +27,10 @@ class UserController {
     fun changePassword(password: String, newPassword: String): ResultEntity {
         val account = SecurityContextHolder.getContext().authentication.name
         return userService.changePassword(account, password, newPassword)
+    }
+
+    @PostMapping("/logout")
+    fun logout(): ResultEntity {
+        return userService.logout()
     }
 }
