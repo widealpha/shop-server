@@ -15,13 +15,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 class SecurityConfig : WebSecurityConfigurerAdapter() {
+
     override fun configure(http: HttpSecurity) {
         //授权
         http.authorizeRequests()
             .antMatchers("/login", "/user/login", "/user/register", "/user/logout").permitAll()
             .anyRequest().authenticated()
             .and().addFilterBefore(
-                JwtAuthenticationFilter(authenticationManager()),
+                getJwtAuthenticationFilter(),
                 UsernamePasswordAuthenticationFilter::class.java
             )
             .exceptionHandling()
@@ -39,5 +40,10 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     @Bean
     fun getPw(): PasswordEncoder {
         return BCryptPasswordEncoder()
+    }
+
+    @Bean
+    fun getJwtAuthenticationFilter() :JwtAuthenticationFilter{
+        return JwtAuthenticationFilter(authenticationManager())
     }
 }

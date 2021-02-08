@@ -1,6 +1,7 @@
 package cn.widealpha.shop.controller
 
 import cn.widealpha.shop.entity.ResultEntity
+import cn.widealpha.shop.service.RedisService
 import cn.widealpha.shop.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -22,6 +23,11 @@ class UserController {
     @PostMapping("/login")
     fun login(account: String, password: String): ResultEntity {
         return userService.login(account, password)
+    }
+
+    @PostMapping("/logout")
+    fun logout(): ResultEntity {
+        return userService.logout()
     }
 
     @PostMapping("/changePassword")

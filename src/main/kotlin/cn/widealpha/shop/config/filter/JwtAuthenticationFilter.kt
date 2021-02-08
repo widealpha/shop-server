@@ -1,6 +1,7 @@
 package cn.widealpha.shop.config.filter
 
 import cn.widealpha.shop.entity.ResultEntity
+import cn.widealpha.shop.service.RedisService
 import cn.widealpha.shop.util.JwtTokenUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -24,6 +25,9 @@ import javax.servlet.http.HttpServletResponse
 
 class JwtAuthenticationFilter(authenticationManager: AuthenticationManager?) :
     BasicAuthenticationFilter(authenticationManager) {
+    @Autowired
+    lateinit var redisService: RedisService
+
     @Throws(IOException::class, ServletException::class)
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain) {
         val tokenHeader = request.getHeader(JwtTokenUtil.TOKEN_HEADER)
@@ -35,7 +39,14 @@ class JwtAuthenticationFilter(authenticationManager: AuthenticationManager?) :
         //如果请求头中有token,则进行解析，并且设置认证信息
         try {
             if (!JwtTokenUtil.isExpiration(tokenHeader.replace(JwtTokenUtil.TOKEN_PREFIX, ""))!!) {
-
+                if (redisService.hasKey(tokenHeader)) {
+                    response.apply {
+                        characterEncoding = "UTF-8"
+                        setHeader("Content-type", "text/html;charset=UTF-8")
+                        writer.print(ResultEntity.error(-10, "Token已注销"))
+                    }
+                    return
+                }
                 //设置上下文
                 val authentication = getAuthentication(tokenHeader)
                 SecurityContextHolder.getContext().authentication = authentication
@@ -63,5 +74,4 @@ class JwtAuthenticationFilter(authenticationManager: AuthenticationManager?) :
             UsernamePasswordAuthenticationToken(username, null, roles)
         } else null
     }
-
 }

@@ -37,6 +37,12 @@ class UserService {
     @Autowired
     lateinit var authenticationManager: AuthenticationManager
 
+    @Autowired
+    lateinit var redisService: RedisService
+
+    @Autowired
+    lateinit var request: HttpServletRequest
+
     fun register(account: String, password: String, username: String?): ResultEntity {
         if (StringUtil.isEmpty(account, password)) {
             return ResultEntity.data("用户名或密码不能为空")
@@ -72,6 +78,11 @@ class UserService {
         val auth = authenticationManager.authenticate(token)
         SecurityContextHolder.getContext().authentication = auth
         return ResultEntity.data(JwtTokenUtil.createToken(account, "normal"))
+    }
+
+    fun logout(): ResultEntity {
+        redisService.put(request.getHeader(JwtTokenUtil.TOKEN_HEADER), "0")
+        return ResultEntity.data(true)
     }
 
     fun changePassword(password: String, newPassword: String): ResultEntity {

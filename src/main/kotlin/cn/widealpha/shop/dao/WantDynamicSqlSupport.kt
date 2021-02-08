@@ -1,6 +1,6 @@
 /*
  * Auto-generated file. Created by MyBatis Generator
- * Generation date: 2021-02-07T02:30:40.196+08:00
+ * Generation date: 2021-02-07T03:06:50.587+08:00
  */
 package cn.widealpha.shop.dao
 
@@ -15,6 +15,6 @@ object WantDynamicSqlSupport {
 
         val title = column<String>("title", JDBCType.VARCHAR)
 
-        val message = column<String>("message", JDBCType.VARCHAR)
+        val description = column<String>("description", JDBCType.VARCHAR)
     }
 }

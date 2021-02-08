@@ -1,6 +1,6 @@
 /*
  * Auto-generated file. Created by MyBatis Generator
- * Generation date: 2021-02-07T02:30:40.196+08:00
+ * Generation date: 2021-02-07T03:06:50.602+08:00
  */
 package cn.widealpha.shop.dao
 
@@ -44,7 +44,7 @@ interface WantMapper {
         Result(column="want_id", property="wantId", jdbcType=JdbcType.INTEGER, id=true),
         Result(column="account", property="account", jdbcType=JdbcType.VARCHAR),
         Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
-        Result(column="message", property="message", jdbcType=JdbcType.VARCHAR)
+        Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
     ])
     fun selectMany(selectStatement: SelectStatementProvider): List<WantRecord>
 
