@@ -12,9 +12,11 @@ import cn.widealpha.shop.dao.ChatMessageDynamicSqlSupport.ChatMessage.senderAcco
 import cn.widealpha.shop.dao.ChatMessageDynamicSqlSupport.ChatMessage.targetAccount
 import cn.widealpha.shop.dao.ChatMessageDynamicSqlSupport.ChatMessage.timestamp
 import cn.widealpha.shop.domain.ChatMessageRecord
-import org.mybatis.dynamic.sql.SqlBuilder.isEqualTo
+import org.mybatis.dynamic.sql.SqlBuilder
+import org.mybatis.dynamic.sql.SqlBuilder.*
 import org.mybatis.dynamic.sql.util.kotlin.*
 import org.mybatis.dynamic.sql.util.kotlin.mybatis3.*
+import java.util.*
 
 fun ChatMessageMapper.count(completer: CountCompleter) =
     countFrom(this::count, ChatMessage, completer)
@@ -71,9 +73,49 @@ fun ChatMessageMapper.select(completer: SelectCompleter) =
 fun ChatMessageMapper.selectDistinct(completer: SelectCompleter) =
     selectDistinct(this::selectMany, columnList, ChatMessage, completer)
 
+fun ChatMessageMapper.selectTargetAccounts(account_: String) =
+    selectDistinct {
+        where(senderAccount, isEqualTo(account_))
+    }
+
 fun ChatMessageMapper.selectByPrimaryKey(messageId_: Int) =
     selectOne {
         where(messageId, isEqualTo(messageId_))
+    }
+
+fun ChatMessageMapper.selectUnreadMessage(account_: String) =
+    selectOne {
+        where(targetAccount, isEqualTo(account_))
+        and(readTimes, isEqualTo(0))
+        orderBy(timestamp.descending())
+    }
+
+fun ChatMessageMapper.selectMessagesWithLimit(limit_: Int, account_: String) =
+    select {
+        where(senderAccount, isEqualTo(account_))
+        or(targetAccount, isEqualTo(account_))
+        orderBy(timestamp.descending())
+        limit(limit_.toLong())
+    }
+
+fun ChatMessageMapper.selectTargetWithLimit(targetAccount_: String, account_: String, limit_: Int) =
+    select {
+        where(senderAccount, isEqualTo(account_), SqlBuilder.and(targetAccount, isEqualTo(targetAccount_)))
+        or(senderAccount, isEqualTo(targetAccount_), SqlBuilder.and(targetAccount, isEqualTo(account_)))
+        orderBy(timestamp.descending())
+        limit(limit_.toLong())
+    }
+
+fun ChatMessageMapper.selectTargetDuringTime(
+    targetAccount_: String,
+    account_: String,
+    startTimestamp: Date,
+    endTimestamp: Date
+) =
+    select {
+        where(senderAccount, isEqualTo(account_), SqlBuilder.and(targetAccount, isEqualTo(targetAccount_)))
+        or(senderAccount, isEqualTo(targetAccount_), SqlBuilder.and(targetAccount, isEqualTo(account_)))
+        and(timestamp, isIn(startTimestamp, endTimestamp))
     }
 
 fun ChatMessageMapper.update(completer: UpdateCompleter) =
@@ -117,4 +159,11 @@ fun ChatMessageMapper.updateByPrimaryKeySelective(record: ChatMessageRecord) =
         set(message).equalToWhenPresent(record::message)
         set(readTimes).equalToWhenPresent(record::readTimes)
         where(messageId, isEqualTo(record::messageId))
+    }
+
+fun ChatMessageMapper.updateUnreadMessage(targetAccount_: String) =
+    update {
+        set(readTimes).equalTo(1)
+        where(readTimes, isEqualTo(0))
+        and(targetAccount, isEqualTo(targetAccount_))
     }
