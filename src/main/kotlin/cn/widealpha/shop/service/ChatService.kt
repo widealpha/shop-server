@@ -34,9 +34,7 @@ class ChatService {
     }
 
     fun allTargetAccounts(): ResultEntity {
-        return ResultEntity.data(chatMessageMapper.selectTargetAccounts(getCurrentAccount())
-            .map { it.targetAccount }.toList()
-        )
+        return ResultEntity.data(chatMessageMapper.selectTargetAccounts(getCurrentAccount()))
     }
 
     fun messageDuringTimeWithTarget(targetAccount: String, startTime: Long, endTime: Long): ResultEntity {

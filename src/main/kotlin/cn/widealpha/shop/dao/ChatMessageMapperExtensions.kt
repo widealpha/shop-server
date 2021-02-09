@@ -74,7 +74,7 @@ fun ChatMessageMapper.selectDistinct(completer: SelectCompleter) =
     selectDistinct(this::selectMany, columnList, ChatMessage, completer)
 
 fun ChatMessageMapper.selectTargetAccounts(account_: String) =
-    selectDistinct {
+    selectDistinct(this::selectManyAccount, listOf(senderAccount, targetAccount), ChatMessage) {
         where(senderAccount, isEqualTo(account_))
     }
 
@@ -100,8 +100,12 @@ fun ChatMessageMapper.selectMessagesWithLimit(limit_: Int, account_: String) =
 
 fun ChatMessageMapper.selectTargetWithLimit(targetAccount_: String, account_: String, limit_: Int) =
     select {
-        where(senderAccount, isEqualTo(account_), SqlBuilder.and(targetAccount, isEqualTo(targetAccount_)))
-        or(senderAccount, isEqualTo(targetAccount_), SqlBuilder.and(targetAccount, isEqualTo(account_)))
+        where(senderAccount, isEqualTo(account_)) {
+            and(targetAccount, isEqualTo(targetAccount_))
+        }
+        or(senderAccount, isEqualTo(targetAccount_)) {
+            and(targetAccount, isEqualTo(account_))
+        }
         orderBy(timestamp.descending())
         limit(limit_.toLong())
     }
@@ -113,9 +117,14 @@ fun ChatMessageMapper.selectTargetDuringTime(
     endTimestamp: Date
 ) =
     select {
-        where(senderAccount, isEqualTo(account_), SqlBuilder.and(targetAccount, isEqualTo(targetAccount_)))
-        or(senderAccount, isEqualTo(targetAccount_), SqlBuilder.and(targetAccount, isEqualTo(account_)))
-        and(timestamp, isIn(startTimestamp, endTimestamp))
+        where(senderAccount, isEqualTo(account_)) {
+            and(targetAccount, isEqualTo(targetAccount_))
+            and(timestamp, isBetween(startTimestamp).and(endTimestamp))
+        }
+        or(senderAccount, isEqualTo(targetAccount_)) {
+            and(targetAccount, isEqualTo(account_))
+            and(timestamp, isBetween(startTimestamp).and(endTimestamp))
+        }
     }
 
 fun ChatMessageMapper.update(completer: UpdateCompleter) =

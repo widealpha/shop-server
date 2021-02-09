@@ -50,6 +50,12 @@ interface ChatMessageMapper {
     ])
     fun selectMany(selectStatement: SelectStatementProvider): List<ChatMessageRecord>
 
+    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @Results(id="ChatMessageTargetAccountResult", value = [
+        Result(column="target_account", property="targetAccount", jdbcType=JdbcType.VARCHAR)
+    ])
+    fun selectManyAccount(selectStatement: SelectStatementProvider): List<String>
+
     @UpdateProvider(type=SqlProviderAdapter::class, method="update")
     fun update(updateStatement: UpdateStatementProvider): Int
 }
