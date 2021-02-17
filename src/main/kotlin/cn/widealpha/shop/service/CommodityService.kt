@@ -41,6 +41,15 @@ class CommodityService {
         return ResultEntity.data(result)
     }
 
+    fun deleteCommodity(commodityId: Int):ResultEntity {
+        val commodityRecord = commodityMapper.selectByPrimaryKey(commodityId);
+        return if (commodityRecord?.account == getCurrentAccount()){
+            ResultEntity.data(commodityMapper.deleteByPrimaryKey(commodityId) >0)
+        } else {
+            ResultEntity.error(-1, "商品不存在，或无权删除商品")
+        }
+    }
+
     private fun getCurrentAccount(): String {
         return SecurityContextHolder.getContext().authentication.name
     }

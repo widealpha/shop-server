@@ -18,7 +18,7 @@ class WantController {
         title: String? = null,
         description: String? = null
     ): ResultEntity {
-        val wantRecord = WantRecord(null,null, title, description)
+        val wantRecord = WantRecord(null, null, title, description)
         return wantService.addWant(wantRecord)
     }
 
@@ -35,6 +35,11 @@ class WantController {
     @RequestMapping("/myWant")
     fun myWant(): ResultEntity {
         return wantService.myWant()
+    }
+
+    @RequestMapping("/deleteMyWant")
+    fun deleteMyWant(wantId: Int): ResultEntity {
+        return wantService.deleteWant(wantId)
     }
 
     @RequestMapping("/searchWant")

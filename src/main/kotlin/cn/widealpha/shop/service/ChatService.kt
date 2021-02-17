@@ -16,7 +16,7 @@ class ChatService {
     fun sendMessage(chatMessageRecord: ChatMessageRecord): ResultEntity {
         chatMessageRecord.senderAccount = getCurrentAccount()
         val result = chatMessageMapper.insertSelective(chatMessageRecord)
-        return ResultEntity.data(result > 0)
+        return ResultEntity.data(result)
     }
 
     fun unreadMessage(): ResultEntity {

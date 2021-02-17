@@ -41,6 +41,15 @@ class WantService {
         return ResultEntity.data(result)
     }
 
+    fun deleteWant(wantId: Int):ResultEntity{
+        val wantRecord = wantMapper.selectByPrimaryKey(wantId)
+        return if (wantRecord?.account == getCurrentAccount()){
+            ResultEntity.data(wantMapper.deleteByPrimaryKey(wantId) > 0)
+        } else {
+            ResultEntity.error(-1, "需求不存在，或无权删除需求")
+        }
+    }
+
     private fun getCurrentAccount(): String {
         return SecurityContextHolder.getContext().authentication.name
     }

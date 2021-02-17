@@ -31,6 +31,11 @@ class UserInfoController {
         return userInfoService.getHeadImage()
     }
 
+    @PostMapping("othersHeadImage")
+    fun getOthersHeadImage(account: String): ResultEntity {
+        return userInfoService.getOthersHeadImage(account)
+    }
+
     @PostMapping("changeUserInfo")
     fun changeUserInfo(
         headImage: String? = null,

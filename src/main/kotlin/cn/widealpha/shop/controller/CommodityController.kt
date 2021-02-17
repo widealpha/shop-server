@@ -40,6 +40,11 @@ class CommodityController {
         return commodityService.myCommodity()
     }
 
+    @RequestMapping("/deleteMyCommodity")
+    fun deleteMyCommodity(commodityId: Int):ResultEntity{
+        return commodityService.deleteCommodity(commodityId)
+    }
+
     @RequestMapping("/searchCommodity")
     fun searchCommodity(key: String): ResultEntity {
         return commodityService.searchCommodity(key)
