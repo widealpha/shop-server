@@ -44,4 +44,9 @@ class UserController {
     fun getUsername(): ResultEntity {
         return userService.getUsername()
     }
+
+    @PostMapping("/othersUsername")
+    fun getOthersUsername(account: String): ResultEntity {
+        return userService.getOthersUsername(account)
+    }
 }

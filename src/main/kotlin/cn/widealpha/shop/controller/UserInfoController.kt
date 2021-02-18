@@ -21,6 +21,12 @@ class UserInfoController {
         return userInfoService.gerUserInfo()
     }
 
+    @PostMapping("othersUserInfo")
+    fun getOtherUserInfo(account: String): ResultEntity {
+        return userInfoService.gerOtherUserInfo(account)
+    }
+
+
     @PostMapping("changeHeadImage")
     fun changeHeadImage(@RequestParam image: MultipartFile?): ResultEntity {
         return userInfoService.setHeadImage(image)

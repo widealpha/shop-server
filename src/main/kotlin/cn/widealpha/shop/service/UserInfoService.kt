@@ -31,6 +31,14 @@ class UserInfoService {
         return ResultEntity.data(userInfoRecord)
     }
 
+    fun gerOtherUserInfo(account: String): ResultEntity {
+        val userInfoRecord = userInfoMapper.selectByPrimaryKey(account)
+            ?: return ResultEntity.error(-1, "用户不存在")
+        userInfoRecord.name = null
+        userInfoRecord.location = null
+        return ResultEntity.data(userInfoRecord)
+    }
+
     fun getHeadImage(): ResultEntity {
         val userInfoRecord = userInfoMapper.selectByPrimaryKey(getCurrentAccount())
             ?: return ResultEntity.error(-1, "用户不存在")

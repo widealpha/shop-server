@@ -108,6 +108,11 @@ class UserService {
         return ResultEntity.data(userRecord.username)
     }
 
+    fun getOthersUsername(account: String): ResultEntity {
+        val userRecord = userMapper.selectByPrimaryKey(account) ?: return ResultEntity.error(-1, "用户不存在")
+        return ResultEntity.data(userRecord.username)
+    }
+
     private fun getCurrentAccount(): String {
         return SecurityContextHolder.getContext().authentication.name
     }
