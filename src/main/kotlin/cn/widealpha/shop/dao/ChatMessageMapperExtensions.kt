@@ -84,7 +84,7 @@ fun ChatMessageMapper.selectByPrimaryKey(messageId_: Int) =
     }
 
 fun ChatMessageMapper.selectUnreadMessage(account_: String) =
-    selectOne {
+    select {
         where(targetAccount, isEqualTo(account_))
         and(readTimes, isEqualTo(0))
         orderBy(timestamp.descending())
