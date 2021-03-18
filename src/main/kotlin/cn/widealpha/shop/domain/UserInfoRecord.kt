@@ -5,11 +5,11 @@
 package cn.widealpha.shop.domain
 
 data class UserInfoRecord(
-    var account: String? = null,
-    var headImage: String? = null,
-    var age: Int? = null,
-    var location: String? = null,
-    var introduction: String? = null,
-    var sex: Int? = null,
-    var name: String? = null
+        var account: String? = null,
+        var headImage: String? = null,
+        var age: Int? = null,
+        var location: String? = null,
+        var introduction: String? = null,
+        var sex: Int? = null,
+        var name: String? = null
 )

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service
 class UserDetailService : UserDetailsService {
     @Autowired
     lateinit var passwordEncoder: PasswordEncoder
+
     @Autowired
     lateinit var userMapper: UserMapper
 

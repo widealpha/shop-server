@@ -16,105 +16,105 @@ import org.mybatis.dynamic.sql.util.kotlin.*
 import org.mybatis.dynamic.sql.util.kotlin.mybatis3.*
 
 fun WantMapper.count(completer: CountCompleter) =
-    countFrom(this::count, Want, completer)
+        countFrom(this::count, Want, completer)
 
 fun WantMapper.delete(completer: DeleteCompleter) =
-    deleteFrom(this::delete, Want, completer)
+        deleteFrom(this::delete, Want, completer)
 
 fun WantMapper.deleteByPrimaryKey(wantId_: Int) =
-    delete {
-        where(wantId, isEqualTo(wantId_))
-    }
+        delete {
+            where(wantId, isEqualTo(wantId_))
+        }
 
 fun WantMapper.insert(record: WantRecord) =
-    insert(this::insert, record, Want) {
-        map(wantId).toProperty("wantId")
-        map(account).toProperty("account")
-        map(title).toProperty("title")
-        map(description).toProperty("description")
-    }
+        insert(this::insert, record, Want) {
+            map(wantId).toProperty("wantId")
+            map(account).toProperty("account")
+            map(title).toProperty("title")
+            map(description).toProperty("description")
+        }
 
 fun WantMapper.insertMultiple(records: Collection<WantRecord>) =
-    insertMultiple(this::insertMultiple, records, Want) {
-        map(wantId).toProperty("wantId")
-        map(account).toProperty("account")
-        map(title).toProperty("title")
-        map(description).toProperty("description")
-    }
+        insertMultiple(this::insertMultiple, records, Want) {
+            map(wantId).toProperty("wantId")
+            map(account).toProperty("account")
+            map(title).toProperty("title")
+            map(description).toProperty("description")
+        }
 
 fun WantMapper.insertMultiple(vararg records: WantRecord) =
-    insertMultiple(records.toList())
+        insertMultiple(records.toList())
 
 fun WantMapper.insertSelective(record: WantRecord) =
-    insert(this::insert, record, Want) {
-        map(wantId).toPropertyWhenPresent("wantId", record::wantId)
-        map(account).toPropertyWhenPresent("account", record::account)
-        map(title).toPropertyWhenPresent("title", record::title)
-        map(description).toPropertyWhenPresent("description", record::description)
-    }
+        insert(this::insert, record, Want) {
+            map(wantId).toPropertyWhenPresent("wantId", record::wantId)
+            map(account).toPropertyWhenPresent("account", record::account)
+            map(title).toPropertyWhenPresent("title", record::title)
+            map(description).toPropertyWhenPresent("description", record::description)
+        }
 
 private val columnList = listOf(wantId, account, title, description)
 
 fun WantMapper.selectOne(completer: SelectCompleter) =
-    selectOne(this::selectOne, columnList, Want, completer)
+        selectOne(this::selectOne, columnList, Want, completer)
 
 fun WantMapper.select(completer: SelectCompleter) =
-    selectList(this::selectMany, columnList, Want, completer)
+        selectList(this::selectMany, columnList, Want, completer)
 
 fun WantMapper.selectDistinct(completer: SelectCompleter) =
-    selectDistinct(this::selectMany, columnList, Want, completer)
+        selectDistinct(this::selectMany, columnList, Want, completer)
 
 fun WantMapper.selectByPrimaryKey(wantId_: Int) =
-    selectOne {
-        where(wantId, isEqualTo(wantId_))
-    }
+        selectOne {
+            where(wantId, isEqualTo(wantId_))
+        }
 
 fun WantMapper.selectAll() =
-    select {
-        allRows()
-    }
+        select {
+            allRows()
+        }
 
 fun WantMapper.selectMyAll(_account: String) =
-    select {
-        where(account, isEqualTo(_account))
-    }
+        select {
+            where(account, isEqualTo(_account))
+        }
 
 fun WantMapper.selectByKey(key: String) =
-    select {
-        where(title, SqlBuilder.isLike("%$key%"))
-    }
+        select {
+            where(title, SqlBuilder.isLike("%$key%"))
+        }
 
 fun WantMapper.update(completer: UpdateCompleter) =
-    update(this::update, Want, completer)
+        update(this::update, Want, completer)
 
 fun KotlinUpdateBuilder.updateAllColumns(record: WantRecord) =
-    apply {
-        set(wantId).equalTo(record::wantId)
-        set(account).equalTo(record::account)
-        set(title).equalTo(record::title)
-        set(description).equalTo(record::description)
-    }
+        apply {
+            set(wantId).equalTo(record::wantId)
+            set(account).equalTo(record::account)
+            set(title).equalTo(record::title)
+            set(description).equalTo(record::description)
+        }
 
 fun KotlinUpdateBuilder.updateSelectiveColumns(record: WantRecord) =
-    apply {
-        set(wantId).equalToWhenPresent(record::wantId)
-        set(account).equalToWhenPresent(record::account)
-        set(title).equalToWhenPresent(record::title)
-        set(description).equalToWhenPresent(record::description)
-    }
+        apply {
+            set(wantId).equalToWhenPresent(record::wantId)
+            set(account).equalToWhenPresent(record::account)
+            set(title).equalToWhenPresent(record::title)
+            set(description).equalToWhenPresent(record::description)
+        }
 
 fun WantMapper.updateByPrimaryKey(record: WantRecord) =
-    update {
-        set(account).equalTo(record::account)
-        set(title).equalTo(record::title)
-        set(description).equalTo(record::description)
-        where(wantId, isEqualTo(record::wantId))
-    }
+        update {
+            set(account).equalTo(record::account)
+            set(title).equalTo(record::title)
+            set(description).equalTo(record::description)
+            where(wantId, isEqualTo(record::wantId))
+        }
 
 fun WantMapper.updateByPrimaryKeySelective(record: WantRecord) =
-    update {
-        set(account).equalToWhenPresent(record::account)
-        set(title).equalToWhenPresent(record::title)
-        set(description).equalToWhenPresent(record::description)
-        where(wantId, isEqualTo(record::wantId))
-    }
+        update {
+            set(account).equalToWhenPresent(record::account)
+            set(title).equalToWhenPresent(record::title)
+            set(description).equalToWhenPresent(record::description)
+            where(wantId, isEqualTo(record::wantId))
+        }

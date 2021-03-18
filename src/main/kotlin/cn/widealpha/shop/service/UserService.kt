@@ -52,16 +52,16 @@ class UserService {
             name = UUID.randomUUID().toString().substring(0, 6)
         return try {
             val result = userMapper.insert(
-                UserRecord(
-                    account = account,
-                    username = name,
-                    password = passwordEncoder.encode(password)
-                )
+                    UserRecord(
+                            account = account,
+                            username = name,
+                            password = passwordEncoder.encode(password)
+                    )
             )
             userInfoMapper.insertSelective(
-                UserInfoRecord(
-                    account = account
-                )
+                    UserInfoRecord(
+                            account = account
+                    )
             )
             ResultEntity.data(result > 0)
         } catch (exception: DuplicateKeyException) {
@@ -71,9 +71,9 @@ class UserService {
 
     fun login(account: String, password: String): ResultEntity {
         val token = UsernamePasswordAuthenticationToken(
-            account,
-            password,
-            AuthorityUtils.commaSeparatedStringToAuthorityList("normal")
+                account,
+                password,
+                AuthorityUtils.commaSeparatedStringToAuthorityList("normal")
         )
         val auth = authenticationManager.authenticate(token)
         SecurityContextHolder.getContext().authentication = auth

@@ -15,8 +15,8 @@ class WantController {
 
     @RequestMapping("/addWant")
     fun addWant(
-        title: String? = null,
-        description: String? = null
+            title: String? = null,
+            description: String? = null
     ): ResultEntity {
         val wantRecord = WantRecord(null, null, title, description)
         return wantService.addWant(wantRecord)

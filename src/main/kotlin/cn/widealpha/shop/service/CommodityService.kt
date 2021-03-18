@@ -15,7 +15,7 @@ class CommodityService {
     fun addCommodity(commodityRecord: CommodityRecord): ResultEntity {
         commodityRecord.account = getCurrentAccount()
         val result = commodityMapper.insertSelective(
-            commodityRecord
+                commodityRecord
         )
         return ResultEntity.data(result > 0)
     }
@@ -32,7 +32,7 @@ class CommodityService {
 
     fun commodityInfo(commodityId: Int): ResultEntity {
         val result = commodityMapper.selectByPrimaryKey(commodityId)
-            ?: return ResultEntity.error(-1, "商品不存在")
+                ?: return ResultEntity.error(-1, "商品不存在")
         return ResultEntity.data(result)
     }
 
@@ -41,10 +41,10 @@ class CommodityService {
         return ResultEntity.data(result)
     }
 
-    fun deleteCommodity(commodityId: Int):ResultEntity {
-        val commodityRecord = commodityMapper.selectByPrimaryKey(commodityId);
-        return if (commodityRecord?.account == getCurrentAccount()){
-            ResultEntity.data(commodityMapper.deleteByPrimaryKey(commodityId) >0)
+    fun deleteCommodity(commodityId: Int): ResultEntity {
+        val commodityRecord = commodityMapper.selectByPrimaryKey(commodityId)
+        return if (commodityRecord?.account == getCurrentAccount()) {
+            ResultEntity.data(commodityMapper.deleteByPrimaryKey(commodityId) > 0)
         } else {
             ResultEntity.error(-1, "商品不存在，或无权删除商品")
         }

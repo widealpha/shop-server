@@ -10,11 +10,11 @@ class RedisService {
     @Resource(name = "redisTemplate")
     lateinit var valueOperations: ValueOperations<String, String>
 
-    fun hasKey(key:String): Boolean{
+    fun hasKey(key: String): Boolean {
         return valueOperations[key] != null
     }
 
-    fun put(key: String, value: String){
-        valueOperations.setIfAbsent(key, value,12,TimeUnit.DAYS)
+    fun put(key: String, value: String) {
+        valueOperations.setIfAbsent(key, value, 12, TimeUnit.DAYS)
     }
 }

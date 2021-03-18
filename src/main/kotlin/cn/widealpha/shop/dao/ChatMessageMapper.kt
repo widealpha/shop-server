@@ -16,40 +16,40 @@ import org.mybatis.dynamic.sql.util.SqlProviderAdapter
 
 @Mapper
 interface ChatMessageMapper {
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     fun count(selectStatement: SelectStatementProvider): Long
 
-    @DeleteProvider(type=SqlProviderAdapter::class, method="delete")
+    @DeleteProvider(type = SqlProviderAdapter::class, method = "delete")
     fun delete(deleteStatement: DeleteStatementProvider): Int
 
-    @InsertProvider(type=SqlProviderAdapter::class, method="insert")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insert")
     @Options(useGeneratedKeys = true)
     fun insert(insertStatement: InsertStatementProvider<ChatMessageRecord>): Int
 
-    @InsertProvider(type=SqlProviderAdapter::class, method="insertMultiple")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insertMultiple")
     fun insertMultiple(multipleInsertStatement: MultiRowInsertStatementProvider<ChatMessageRecord>): Int
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     @ResultMap("ChatMessageRecordResult")
     fun selectOne(selectStatement: SelectStatementProvider): ChatMessageRecord?
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
-    @Results(id="ChatMessageRecordResult", value = [
-        Result(column="message_id", property="messageId", jdbcType=JdbcType.INTEGER, id=true),
-        Result(column="sender_account", property="senderAccount", jdbcType=JdbcType.VARCHAR),
-        Result(column="target_account", property="targetAccount", jdbcType=JdbcType.VARCHAR),
-        Result(column="timestamp", property="timestamp", jdbcType=JdbcType.TIMESTAMP),
-        Result(column="message", property="message", jdbcType=JdbcType.VARCHAR),
-        Result(column="read_times", property="readTimes", jdbcType=JdbcType.INTEGER)
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
+    @Results(id = "ChatMessageRecordResult", value = [
+        Result(column = "message_id", property = "messageId", jdbcType = JdbcType.INTEGER, id = true),
+        Result(column = "sender_account", property = "senderAccount", jdbcType = JdbcType.VARCHAR),
+        Result(column = "target_account", property = "targetAccount", jdbcType = JdbcType.VARCHAR),
+        Result(column = "timestamp", property = "timestamp", jdbcType = JdbcType.TIMESTAMP),
+        Result(column = "message", property = "message", jdbcType = JdbcType.VARCHAR),
+        Result(column = "read_times", property = "readTimes", jdbcType = JdbcType.INTEGER)
     ])
     fun selectMany(selectStatement: SelectStatementProvider): List<ChatMessageRecord>
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
-    @Results(id="ChatMessageTargetAccountResult", value = [
-        Result(column="target_account", property="targetAccount", jdbcType=JdbcType.VARCHAR)
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
+    @Results(id = "ChatMessageTargetAccountResult", value = [
+        Result(column = "target_account", property = "targetAccount", jdbcType = JdbcType.VARCHAR)
     ])
     fun selectManyAccount(selectStatement: SelectStatementProvider): List<String>
 
-    @UpdateProvider(type=SqlProviderAdapter::class, method="update")
+    @UpdateProvider(type = SqlProviderAdapter::class, method = "update")
     fun update(updateStatement: UpdateStatementProvider): Int
 }

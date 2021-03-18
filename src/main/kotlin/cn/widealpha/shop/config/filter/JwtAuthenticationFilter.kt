@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 class JwtAuthenticationFilter(authenticationManager: AuthenticationManager?) :
-    BasicAuthenticationFilter(authenticationManager) {
+        BasicAuthenticationFilter(authenticationManager) {
     @Autowired
     lateinit var redisService: RedisService
 

@@ -19,15 +19,15 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         //授权
         http.authorizeRequests()
-            .antMatchers("/login", "/user/login", "/user/register", "/user/logout").permitAll()
-            .anyRequest().authenticated()
-            .and().addFilterBefore(
-                getJwtAuthenticationFilter(),
-                UsernamePasswordAuthenticationFilter::class.java
-            )
-            .exceptionHandling()
-            .accessDeniedHandler(GlobalAccessDeniedHandler())
-            .authenticationEntryPoint(GlobalAuthenticationEntryPoint())
+                .antMatchers("/login", "/user/login", "/user/register", "/user/logout").permitAll()
+                .anyRequest().authenticated()
+                .and().addFilterBefore(
+                        getJwtAuthenticationFilter(),
+                        UsernamePasswordAuthenticationFilter::class.java
+                )
+                .exceptionHandling()
+                .accessDeniedHandler(GlobalAccessDeniedHandler())
+                .authenticationEntryPoint(GlobalAuthenticationEntryPoint())
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         http.csrf().disable()
     }
@@ -43,7 +43,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     }
 
     @Bean
-    fun getJwtAuthenticationFilter() :JwtAuthenticationFilter{
+    fun getJwtAuthenticationFilter(): JwtAuthenticationFilter {
         return JwtAuthenticationFilter(authenticationManager())
     }
 }

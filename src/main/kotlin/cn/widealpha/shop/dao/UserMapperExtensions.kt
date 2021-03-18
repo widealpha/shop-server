@@ -14,86 +14,86 @@ import org.mybatis.dynamic.sql.util.kotlin.*
 import org.mybatis.dynamic.sql.util.kotlin.mybatis3.*
 
 fun UserMapper.count(completer: CountCompleter) =
-    countFrom(this::count, User, completer)
+        countFrom(this::count, User, completer)
 
 fun UserMapper.delete(completer: DeleteCompleter) =
-    deleteFrom(this::delete, User, completer)
+        deleteFrom(this::delete, User, completer)
 
 fun UserMapper.deleteByPrimaryKey(account_: String) =
-    delete {
-        where(account, isEqualTo(account_))
-    }
+        delete {
+            where(account, isEqualTo(account_))
+        }
 
 fun UserMapper.insert(record: UserRecord) =
-    insert(this::insert, record, User) {
-        map(account).toProperty("account")
-        map(username).toProperty("username")
-        map(password).toProperty("password")
-    }
+        insert(this::insert, record, User) {
+            map(account).toProperty("account")
+            map(username).toProperty("username")
+            map(password).toProperty("password")
+        }
 
 fun UserMapper.insertMultiple(records: Collection<UserRecord>) =
-    insertMultiple(this::insertMultiple, records, User) {
-        map(account).toProperty("account")
-        map(username).toProperty("username")
-        map(password).toProperty("password")
-    }
+        insertMultiple(this::insertMultiple, records, User) {
+            map(account).toProperty("account")
+            map(username).toProperty("username")
+            map(password).toProperty("password")
+        }
 
 fun UserMapper.insertMultiple(vararg records: UserRecord) =
-    insertMultiple(records.toList())
+        insertMultiple(records.toList())
 
 fun UserMapper.insertSelective(record: UserRecord) =
-    insert(this::insert, record, User) {
-        map(account).toPropertyWhenPresent("account", record::account)
-        map(username).toPropertyWhenPresent("username", record::username)
-        map(password).toPropertyWhenPresent("password", record::password)
-    }
+        insert(this::insert, record, User) {
+            map(account).toPropertyWhenPresent("account", record::account)
+            map(username).toPropertyWhenPresent("username", record::username)
+            map(password).toPropertyWhenPresent("password", record::password)
+        }
 
 private val columnList = listOf(account, username, password)
 
 fun UserMapper.selectOne(completer: SelectCompleter) =
-    selectOne(this::selectOne, columnList, User, completer)
+        selectOne(this::selectOne, columnList, User, completer)
 
 fun UserMapper.select(completer: SelectCompleter) =
-    selectList(this::selectMany, columnList, User, completer)
+        selectList(this::selectMany, columnList, User, completer)
 
 fun UserMapper.selectDistinct(completer: SelectCompleter) =
-    selectDistinct(this::selectMany, columnList, User, completer)
+        selectDistinct(this::selectMany, columnList, User, completer)
 
 fun UserMapper.selectByPrimaryKey(account_: String) =
-    selectOne {
-        where(account, isEqualTo(account_))
-    }
+        selectOne {
+            where(account, isEqualTo(account_))
+        }
 
 fun UserMapper.update(completer: UpdateCompleter) =
-    update(this::update, User, completer)
+        update(this::update, User, completer)
 
 fun KotlinUpdateBuilder.updateAllColumns(record: UserRecord) =
-    apply {
-        set(account).equalTo(record::account)
-        set(username).equalTo(record::username)
-        set(password).equalTo(record::password)
-    }
+        apply {
+            set(account).equalTo(record::account)
+            set(username).equalTo(record::username)
+            set(password).equalTo(record::password)
+        }
 
 fun KotlinUpdateBuilder.updateSelectiveColumns(record: UserRecord) =
-    apply {
-        set(account).equalToWhenPresent(record::account)
-        set(username).equalToWhenPresent(record::username)
-        set(password).equalToWhenPresent(record::password)
-    }
+        apply {
+            set(account).equalToWhenPresent(record::account)
+            set(username).equalToWhenPresent(record::username)
+            set(password).equalToWhenPresent(record::password)
+        }
 
 fun UserMapper.updateByPrimaryKey(record: UserRecord) =
-    update {
-        set(username).equalTo(record::username)
-        set(password).equalTo(record::password)
-        where(account, isEqualTo(record::account))
-    }
+        update {
+            set(username).equalTo(record::username)
+            set(password).equalTo(record::password)
+            where(account, isEqualTo(record::account))
+        }
 
 fun UserMapper.updateByPrimaryKeySelective(record: UserRecord) =
-    update {
-        set(username).equalToWhenPresent(record::username)
-        set(password).equalToWhenPresent(record::password)
-        where(account, isEqualTo(record::account))
-    }
+        update {
+            set(username).equalToWhenPresent(record::username)
+            set(password).equalToWhenPresent(record::password)
+            where(account, isEqualTo(record::account))
+        }
 
 //fun UserMapper.updatePasswordByAccountAndPassword(newPassword: String, record: UserRecord) =
 //    update {

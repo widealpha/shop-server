@@ -23,34 +23,34 @@ import org.mybatis.dynamic.sql.util.SqlProviderAdapter
 
 @Mapper
 interface CommodityMapper {
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     fun count(selectStatement: SelectStatementProvider): Long
 
-    @DeleteProvider(type=SqlProviderAdapter::class, method="delete")
+    @DeleteProvider(type = SqlProviderAdapter::class, method = "delete")
     fun delete(deleteStatement: DeleteStatementProvider): Int
 
-    @InsertProvider(type=SqlProviderAdapter::class, method="insert")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insert")
     fun insert(insertStatement: InsertStatementProvider<CommodityRecord>): Int
 
-    @InsertProvider(type=SqlProviderAdapter::class, method="insertMultiple")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insertMultiple")
     fun insertMultiple(multipleInsertStatement: MultiRowInsertStatementProvider<CommodityRecord>): Int
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     @ResultMap("CommodityRecordResult")
     fun selectOne(selectStatement: SelectStatementProvider): CommodityRecord?
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
-    @Results(id="CommodityRecordResult", value = [
-        Result(column="commodity_id", property="commodityId", jdbcType=JdbcType.INTEGER, id=true),
-        Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
-        Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
-        Result(column="price", property="price", jdbcType=JdbcType.DOUBLE),
-        Result(column="category", property="category", jdbcType=JdbcType.VARCHAR),
-        Result(column="image", property="image", jdbcType=JdbcType.VARCHAR),
-        Result(column="account", property="account", jdbcType=JdbcType.VARCHAR)
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
+    @Results(id = "CommodityRecordResult", value = [
+        Result(column = "commodity_id", property = "commodityId", jdbcType = JdbcType.INTEGER, id = true),
+        Result(column = "title", property = "title", jdbcType = JdbcType.VARCHAR),
+        Result(column = "description", property = "description", jdbcType = JdbcType.VARCHAR),
+        Result(column = "price", property = "price", jdbcType = JdbcType.DOUBLE),
+        Result(column = "category", property = "category", jdbcType = JdbcType.VARCHAR),
+        Result(column = "image", property = "image", jdbcType = JdbcType.VARCHAR),
+        Result(column = "account", property = "account", jdbcType = JdbcType.VARCHAR)
     ])
     fun selectMany(selectStatement: SelectStatementProvider): List<CommodityRecord>
 
-    @UpdateProvider(type=SqlProviderAdapter::class, method="update")
+    @UpdateProvider(type = SqlProviderAdapter::class, method = "update")
     fun update(updateStatement: UpdateStatementProvider): Int
 }

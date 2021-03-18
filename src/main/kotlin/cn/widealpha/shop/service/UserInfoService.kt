@@ -19,7 +19,7 @@ class UserInfoService {
     fun setHeadImage(multipartFile: MultipartFile?): ResultEntity {
         val link = FileUtil.saveImage(multipartFile, "/image")
         val userInfoRecord = userInfoMapper.selectByPrimaryKey(getCurrentAccount())
-            ?: return ResultEntity.error(-1, "用户不存在")
+                ?: return ResultEntity.error(-1, "用户不存在")
         userInfoRecord.headImage = link
         val result = userInfoMapper.updateByPrimaryKey(userInfoRecord)
         return ResultEntity.data(result > 0)
@@ -27,13 +27,13 @@ class UserInfoService {
 
     fun gerUserInfo(): ResultEntity {
         val userInfoRecord = userInfoMapper.selectByPrimaryKey(getCurrentAccount())
-            ?: return ResultEntity.error(-1, "用户不存在")
+                ?: return ResultEntity.error(-1, "用户不存在")
         return ResultEntity.data(userInfoRecord)
     }
 
     fun gerOtherUserInfo(account: String): ResultEntity {
         val userInfoRecord = userInfoMapper.selectByPrimaryKey(account)
-            ?: return ResultEntity.error(-1, "用户不存在")
+                ?: return ResultEntity.error(-1, "用户不存在")
         userInfoRecord.name = null
         userInfoRecord.location = null
         return ResultEntity.data(userInfoRecord)
@@ -41,19 +41,19 @@ class UserInfoService {
 
     fun getHeadImage(): ResultEntity {
         val userInfoRecord = userInfoMapper.selectByPrimaryKey(getCurrentAccount())
-            ?: return ResultEntity.error(-1, "用户不存在")
+                ?: return ResultEntity.error(-1, "用户不存在")
         return ResultEntity.data(userInfoRecord.headImage)
     }
 
     fun getOthersHeadImage(account: String): ResultEntity {
         val userInfoRecord = userInfoMapper.selectByPrimaryKey(account)
-            ?: return ResultEntity.error(-1, "用户不存在")
+                ?: return ResultEntity.error(-1, "用户不存在")
         return ResultEntity.data(userInfoRecord.headImage)
     }
 
     fun setUserInfo(userInfo: UserInfoRecord): ResultEntity {
         val userInfoRecord = userInfoMapper.selectByPrimaryKey(getCurrentAccount())
-            ?: return ResultEntity.error(-1, "用户不存在")
+                ?: return ResultEntity.error(-1, "用户不存在")
         if (userInfo.age != null) userInfoRecord.age = userInfo.age
         if (userInfo.introduction != null) userInfoRecord.introduction = userInfo.introduction
         if (userInfo.location != null) userInfoRecord.location = userInfo.location

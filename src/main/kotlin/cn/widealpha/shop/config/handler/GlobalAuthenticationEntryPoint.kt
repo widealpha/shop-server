@@ -9,15 +9,15 @@ import org.springframework.security.web.AuthenticationEntryPoint
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class GlobalAuthenticationEntryPoint :AuthenticationEntryPoint{
+class GlobalAuthenticationEntryPoint : AuthenticationEntryPoint {
     override fun commence(
-        request: HttpServletRequest?,
-        response: HttpServletResponse?,
-        authException: AuthenticationException?
+            request: HttpServletRequest?,
+            response: HttpServletResponse?,
+            authException: AuthenticationException?
     ) {
         response?.apply {
             characterEncoding = "UTF-8"
-            setHeader("Content-type", "text/html;charset=UTF-8");
+            setHeader("Content-type", "text/html;charset=UTF-8")
             when (authException) {
                 is UsernameNotFoundException -> {
                     writer.print(ResultEntity.error(-4, "用户名不存在"))
@@ -25,7 +25,7 @@ class GlobalAuthenticationEntryPoint :AuthenticationEntryPoint{
                 is BadCredentialsException -> {
                     writer.print(ResultEntity.error(-5, "用户名或密码错误"))
                 }
-                is InsufficientAuthenticationException ->{
+                is InsufficientAuthenticationException -> {
                     writer.print(ResultEntity.error(-8, "Token无效"))
                 }
                 else -> {

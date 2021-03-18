@@ -7,10 +7,10 @@ package cn.widealpha.shop.domain
 import java.util.Date
 
 data class ChatMessageRecord(
-    var messageId: Int? = null,
-    var senderAccount: String? = null,
-    var targetAccount: String? = null,
-    var timestamp: Date? = null,
-    var message: String? = null,
-    var readTimes: Int? = null
+        var messageId: Int? = null,
+        var senderAccount: String? = null,
+        var targetAccount: String? = null,
+        var timestamp: Date? = null,
+        var message: String? = null,
+        var readTimes: Int? = null
 )

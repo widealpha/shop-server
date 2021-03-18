@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class GlobalAccessDeniedHandler:AccessDeniedHandler {
+class GlobalAccessDeniedHandler : AccessDeniedHandler {
     override fun handle(
-        request: HttpServletRequest?,
-        response: HttpServletResponse?,
-        exception: AccessDeniedException?
+            request: HttpServletRequest?,
+            response: HttpServletResponse?,
+            exception: AccessDeniedException?
     ) {
         response?.characterEncoding = "UTF-8"
-        response?.setHeader("Content-type", "text/html;charset=UTF-8");
+        response?.setHeader("Content-type", "text/html;charset=UTF-8")
         response?.writer?.print(ResultEntity.error(-7, "无权访问"))
     }
 }

@@ -23,34 +23,34 @@ import org.mybatis.dynamic.sql.util.SqlProviderAdapter
 
 @Mapper
 interface UserInfoMapper {
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     fun count(selectStatement: SelectStatementProvider): Long
 
-    @DeleteProvider(type=SqlProviderAdapter::class, method="delete")
+    @DeleteProvider(type = SqlProviderAdapter::class, method = "delete")
     fun delete(deleteStatement: DeleteStatementProvider): Int
 
-    @InsertProvider(type=SqlProviderAdapter::class, method="insert")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insert")
     fun insert(insertStatement: InsertStatementProvider<UserInfoRecord>): Int
 
-    @InsertProvider(type=SqlProviderAdapter::class, method="insertMultiple")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insertMultiple")
     fun insertMultiple(multipleInsertStatement: MultiRowInsertStatementProvider<UserInfoRecord>): Int
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     @ResultMap("UserInfoRecordResult")
     fun selectOne(selectStatement: SelectStatementProvider): UserInfoRecord?
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
-    @Results(id="UserInfoRecordResult", value = [
-        Result(column="account", property="account", jdbcType=JdbcType.VARCHAR, id=true),
-        Result(column="head_image", property="headImage", jdbcType=JdbcType.VARCHAR),
-        Result(column="age", property="age", jdbcType=JdbcType.INTEGER),
-        Result(column="location", property="location", jdbcType=JdbcType.VARCHAR),
-        Result(column="introduction", property="introduction", jdbcType=JdbcType.VARCHAR),
-        Result(column="sex", property="sex", jdbcType=JdbcType.INTEGER),
-        Result(column="name", property="name", jdbcType=JdbcType.VARCHAR)
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
+    @Results(id = "UserInfoRecordResult", value = [
+        Result(column = "account", property = "account", jdbcType = JdbcType.VARCHAR, id = true),
+        Result(column = "head_image", property = "headImage", jdbcType = JdbcType.VARCHAR),
+        Result(column = "age", property = "age", jdbcType = JdbcType.INTEGER),
+        Result(column = "location", property = "location", jdbcType = JdbcType.VARCHAR),
+        Result(column = "introduction", property = "introduction", jdbcType = JdbcType.VARCHAR),
+        Result(column = "sex", property = "sex", jdbcType = JdbcType.INTEGER),
+        Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR)
     ])
     fun selectMany(selectStatement: SelectStatementProvider): List<UserInfoRecord>
 
-    @UpdateProvider(type=SqlProviderAdapter::class, method="update")
+    @UpdateProvider(type = SqlProviderAdapter::class, method = "update")
     fun update(updateStatement: UpdateStatementProvider): Int
 }

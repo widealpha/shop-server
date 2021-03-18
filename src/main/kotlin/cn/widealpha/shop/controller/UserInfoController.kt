@@ -28,7 +28,7 @@ class UserInfoController {
 
 
     @PostMapping("changeHeadImage")
-    fun changeHeadImage(@RequestParam image: MultipartFile?): ResultEntity {
+    fun changeHeadImage(image: MultipartFile): ResultEntity {
         return userInfoService.setHeadImage(image)
     }
 
@@ -44,12 +44,12 @@ class UserInfoController {
 
     @PostMapping("changeUserInfo")
     fun changeUserInfo(
-        headImage: String? = null,
-        age: Int? = null,
-        location: String? = null,
-        introduction: String? = null,
-        sex: Int? = null,
-        name: String? = null
+            headImage: String? = null,
+            age: Int? = null,
+            location: String? = null,
+            introduction: String? = null,
+            sex: Int? = null,
+            name: String? = null
     ): ResultEntity {
         val userInfoRecord = UserInfoRecord(null, headImage, age, location, introduction, sex, name)
         return userInfoService.setUserInfo(userInfoRecord)

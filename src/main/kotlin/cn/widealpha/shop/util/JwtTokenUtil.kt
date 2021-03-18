@@ -18,12 +18,12 @@ object JwtTokenUtil {
         val map = HashMap<String, Any?>()
         map[NORMAL] = role
         return Jwts.builder()
-            .signWith(SignatureAlgorithm.HS256, SECRET)
-            .setClaims(map)
-            .setSubject(username)
-            .setIssuedAt(Date())
-            .setExpiration(Date(System.currentTimeMillis() + EXPIRATION * 1000))
-            .compact()
+                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .setClaims(map)
+                .setSubject(username)
+                .setIssuedAt(Date())
+                .setExpiration(Date(System.currentTimeMillis() + EXPIRATION * 1000))
+                .compact()
     }
 
     //从token中获取用户名(此处的token是指去掉前缀之后的)

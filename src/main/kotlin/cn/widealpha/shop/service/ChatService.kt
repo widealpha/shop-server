@@ -39,12 +39,12 @@ class ChatService {
 
     fun messageDuringTimeWithTarget(targetAccount: String, startTime: Long, endTime: Long): ResultEntity {
         return ResultEntity.data(
-            chatMessageMapper.selectTargetDuringTime(
-                targetAccount,
-                getCurrentAccount(),
-                Date(startTime),
-                Date(endTime)
-            )
+                chatMessageMapper.selectTargetDuringTime(
+                        targetAccount,
+                        getCurrentAccount(),
+                        Date(startTime),
+                        Date(endTime)
+                )
         )
     }
 

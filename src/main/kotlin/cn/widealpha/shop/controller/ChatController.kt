@@ -17,7 +17,7 @@ class ChatController {
     @RequestMapping("sendMessage")
     fun sendMessage(targetAccount: String, message: String): ResultEntity {
         val chatMessageRecord =
-            ChatMessageRecord(targetAccount = targetAccount, message = message, timestamp = Date())
+                ChatMessageRecord(targetAccount = targetAccount, message = message, timestamp = Date())
         return chatService.sendMessage(chatMessageRecord)
     }
 
@@ -32,17 +32,17 @@ class ChatController {
     }
 
     @RequestMapping("allTargetAccounts")
-    fun allTargets():ResultEntity{
+    fun allTargets(): ResultEntity {
         return chatService.allTargetAccounts()
     }
 
     @RequestMapping("messagesWithTarget")
-    fun targetMessageWithLimit(targetAccount: String, limit: Int):ResultEntity{
+    fun targetMessageWithLimit(targetAccount: String, limit: Int): ResultEntity {
         return chatService.targetMessageWithLimit(targetAccount, limit)
     }
 
     @RequestMapping("messageDuringWithTarget")
-    fun messageDuringTimeWithTarget(targetAccount: String, startTime: Long, endTime: Long):ResultEntity{
+    fun messageDuringTimeWithTarget(targetAccount: String, startTime: Long, endTime: Long): ResultEntity {
         return chatService.messageDuringTimeWithTarget(targetAccount, startTime, endTime)
     }
 }

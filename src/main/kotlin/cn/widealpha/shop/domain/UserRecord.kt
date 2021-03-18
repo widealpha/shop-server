@@ -5,7 +5,7 @@
 package cn.widealpha.shop.domain
 
 data class UserRecord(
-    var account: String? = null,
-    var username: String? = null,
-    var password: String? = null
+        var account: String? = null,
+        var username: String? = null,
+        var password: String? = null
 )

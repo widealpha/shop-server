@@ -5,11 +5,11 @@
 package cn.widealpha.shop.domain
 
 data class CommodityRecord(
-    var commodityId: Int? = null,
-    var title: String? = null,
-    var description: String? = null,
-    var price: Double? = null,
-    var category: String? = null,
-    var image: String? = null,
-    var account: String? = null
+        var commodityId: Int? = null,
+        var title: String? = null,
+        var description: String? = null,
+        var price: Double? = null,
+        var category: String? = null,
+        var image: String? = null,
+        var account: String? = null
 )

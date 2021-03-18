@@ -23,31 +23,31 @@ import org.mybatis.dynamic.sql.util.SqlProviderAdapter
 
 @Mapper
 interface WantMapper {
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     fun count(selectStatement: SelectStatementProvider): Long
 
-    @DeleteProvider(type=SqlProviderAdapter::class, method="delete")
+    @DeleteProvider(type = SqlProviderAdapter::class, method = "delete")
     fun delete(deleteStatement: DeleteStatementProvider): Int
 
-    @InsertProvider(type=SqlProviderAdapter::class, method="insert")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insert")
     fun insert(insertStatement: InsertStatementProvider<WantRecord>): Int
 
-    @InsertProvider(type=SqlProviderAdapter::class, method="insertMultiple")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insertMultiple")
     fun insertMultiple(multipleInsertStatement: MultiRowInsertStatementProvider<WantRecord>): Int
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     @ResultMap("WantRecordResult")
     fun selectOne(selectStatement: SelectStatementProvider): WantRecord?
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
-    @Results(id="WantRecordResult", value = [
-        Result(column="want_id", property="wantId", jdbcType=JdbcType.INTEGER, id=true),
-        Result(column="account", property="account", jdbcType=JdbcType.VARCHAR),
-        Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
-        Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
+    @Results(id = "WantRecordResult", value = [
+        Result(column = "want_id", property = "wantId", jdbcType = JdbcType.INTEGER, id = true),
+        Result(column = "account", property = "account", jdbcType = JdbcType.VARCHAR),
+        Result(column = "title", property = "title", jdbcType = JdbcType.VARCHAR),
+        Result(column = "description", property = "description", jdbcType = JdbcType.VARCHAR)
     ])
     fun selectMany(selectStatement: SelectStatementProvider): List<WantRecord>
 
-    @UpdateProvider(type=SqlProviderAdapter::class, method="update")
+    @UpdateProvider(type = SqlProviderAdapter::class, method = "update")
     fun update(updateStatement: UpdateStatementProvider): Int
 }

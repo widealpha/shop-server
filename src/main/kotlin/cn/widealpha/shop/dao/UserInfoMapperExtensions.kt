@@ -18,111 +18,111 @@ import org.mybatis.dynamic.sql.util.kotlin.*
 import org.mybatis.dynamic.sql.util.kotlin.mybatis3.*
 
 fun UserInfoMapper.count(completer: CountCompleter) =
-    countFrom(this::count, UserInfo, completer)
+        countFrom(this::count, UserInfo, completer)
 
 fun UserInfoMapper.delete(completer: DeleteCompleter) =
-    deleteFrom(this::delete, UserInfo, completer)
+        deleteFrom(this::delete, UserInfo, completer)
 
 fun UserInfoMapper.deleteByPrimaryKey(account_: String) =
-    delete {
-        where(account, isEqualTo(account_))
-    }
+        delete {
+            where(account, isEqualTo(account_))
+        }
 
 fun UserInfoMapper.insert(record: UserInfoRecord) =
-    insert(this::insert, record, UserInfo) {
-        map(account).toProperty("account")
-        map(headImage).toProperty("headImage")
-        map(age).toProperty("age")
-        map(location).toProperty("location")
-        map(introduction).toProperty("introduction")
-        map(sex).toProperty("sex")
-        map(name).toProperty("name")
-    }
+        insert(this::insert, record, UserInfo) {
+            map(account).toProperty("account")
+            map(headImage).toProperty("headImage")
+            map(age).toProperty("age")
+            map(location).toProperty("location")
+            map(introduction).toProperty("introduction")
+            map(sex).toProperty("sex")
+            map(name).toProperty("name")
+        }
 
 fun UserInfoMapper.insertMultiple(records: Collection<UserInfoRecord>) =
-    insertMultiple(this::insertMultiple, records, UserInfo) {
-        map(account).toProperty("account")
-        map(headImage).toProperty("headImage")
-        map(age).toProperty("age")
-        map(location).toProperty("location")
-        map(introduction).toProperty("introduction")
-        map(sex).toProperty("sex")
-        map(name).toProperty("name")
-    }
+        insertMultiple(this::insertMultiple, records, UserInfo) {
+            map(account).toProperty("account")
+            map(headImage).toProperty("headImage")
+            map(age).toProperty("age")
+            map(location).toProperty("location")
+            map(introduction).toProperty("introduction")
+            map(sex).toProperty("sex")
+            map(name).toProperty("name")
+        }
 
 fun UserInfoMapper.insertMultiple(vararg records: UserInfoRecord) =
-    insertMultiple(records.toList())
+        insertMultiple(records.toList())
 
 fun UserInfoMapper.insertSelective(record: UserInfoRecord) =
-    insert(this::insert, record, UserInfo) {
-        map(account).toPropertyWhenPresent("account", record::account)
-        map(headImage).toPropertyWhenPresent("headImage", record::headImage)
-        map(age).toPropertyWhenPresent("age", record::age)
-        map(location).toPropertyWhenPresent("location", record::location)
-        map(introduction).toPropertyWhenPresent("introduction", record::introduction)
-        map(sex).toPropertyWhenPresent("sex", record::sex)
-        map(name).toPropertyWhenPresent("name", record::name)
-    }
+        insert(this::insert, record, UserInfo) {
+            map(account).toPropertyWhenPresent("account", record::account)
+            map(headImage).toPropertyWhenPresent("headImage", record::headImage)
+            map(age).toPropertyWhenPresent("age", record::age)
+            map(location).toPropertyWhenPresent("location", record::location)
+            map(introduction).toPropertyWhenPresent("introduction", record::introduction)
+            map(sex).toPropertyWhenPresent("sex", record::sex)
+            map(name).toPropertyWhenPresent("name", record::name)
+        }
 
 private val columnList = listOf(account, headImage, age, location, introduction, sex, name)
 
 fun UserInfoMapper.selectOne(completer: SelectCompleter) =
-    selectOne(this::selectOne, columnList, UserInfo, completer)
+        selectOne(this::selectOne, columnList, UserInfo, completer)
 
 fun UserInfoMapper.select(completer: SelectCompleter) =
-    selectList(this::selectMany, columnList, UserInfo, completer)
+        selectList(this::selectMany, columnList, UserInfo, completer)
 
 fun UserInfoMapper.selectDistinct(completer: SelectCompleter) =
-    selectDistinct(this::selectMany, columnList, UserInfo, completer)
+        selectDistinct(this::selectMany, columnList, UserInfo, completer)
 
 fun UserInfoMapper.selectByPrimaryKey(account_: String) =
-    selectOne {
-        where(account, isEqualTo(account_))
-    }
+        selectOne {
+            where(account, isEqualTo(account_))
+        }
 
 fun UserInfoMapper.update(completer: UpdateCompleter) =
-    update(this::update, UserInfo, completer)
+        update(this::update, UserInfo, completer)
 
 fun KotlinUpdateBuilder.updateAllColumns(record: UserInfoRecord) =
-    apply {
-        set(account).equalTo(record::account)
-        set(headImage).equalTo(record::headImage)
-        set(age).equalTo(record::age)
-        set(location).equalTo(record::location)
-        set(introduction).equalTo(record::introduction)
-        set(sex).equalTo(record::sex)
-        set(name).equalTo(record::name)
-    }
+        apply {
+            set(account).equalTo(record::account)
+            set(headImage).equalTo(record::headImage)
+            set(age).equalTo(record::age)
+            set(location).equalTo(record::location)
+            set(introduction).equalTo(record::introduction)
+            set(sex).equalTo(record::sex)
+            set(name).equalTo(record::name)
+        }
 
 fun KotlinUpdateBuilder.updateSelectiveColumns(record: UserInfoRecord) =
-    apply {
-        set(account).equalToWhenPresent(record::account)
-        set(headImage).equalToWhenPresent(record::headImage)
-        set(age).equalToWhenPresent(record::age)
-        set(location).equalToWhenPresent(record::location)
-        set(introduction).equalToWhenPresent(record::introduction)
-        set(sex).equalToWhenPresent(record::sex)
-        set(name).equalToWhenPresent(record::name)
-    }
+        apply {
+            set(account).equalToWhenPresent(record::account)
+            set(headImage).equalToWhenPresent(record::headImage)
+            set(age).equalToWhenPresent(record::age)
+            set(location).equalToWhenPresent(record::location)
+            set(introduction).equalToWhenPresent(record::introduction)
+            set(sex).equalToWhenPresent(record::sex)
+            set(name).equalToWhenPresent(record::name)
+        }
 
 fun UserInfoMapper.updateByPrimaryKey(record: UserInfoRecord) =
-    update {
-        set(headImage).equalTo(record::headImage)
-        set(age).equalTo(record::age)
-        set(location).equalTo(record::location)
-        set(introduction).equalTo(record::introduction)
-        set(sex).equalTo(record::sex)
-        set(name).equalTo(record::name)
-        where(account, isEqualTo(record::account))
-    }
+        update {
+            set(headImage).equalTo(record::headImage)
+            set(age).equalTo(record::age)
+            set(location).equalTo(record::location)
+            set(introduction).equalTo(record::introduction)
+            set(sex).equalTo(record::sex)
+            set(name).equalTo(record::name)
+            where(account, isEqualTo(record::account))
+        }
 
 fun UserInfoMapper.updateByPrimaryKeySelective(record: UserInfoRecord) =
-    update {
-        set(headImage).equalToWhenPresent(record::headImage)
-        set(age).equalToWhenPresent(record::age)
-        set(location).equalToWhenPresent(record::location)
-        set(introduction).equalToWhenPresent(record::introduction)
-        set(sex).equalToWhenPresent(record::sex)
-        set(name).equalToWhenPresent(record::name)
-        where(account, isEqualTo(record::account))
-    }
+        update {
+            set(headImage).equalToWhenPresent(record::headImage)
+            set(age).equalToWhenPresent(record::age)
+            set(location).equalToWhenPresent(record::location)
+            set(introduction).equalToWhenPresent(record::introduction)
+            set(sex).equalToWhenPresent(record::sex)
+            set(name).equalToWhenPresent(record::name)
+            where(account, isEqualTo(record::account))
+        }

@@ -5,8 +5,8 @@
 package cn.widealpha.shop.domain
 
 data class WantRecord(
-    var wantId: Int? = null,
-    var account: String? = null,
-    var title: String? = null,
-    var description: String? = null
+        var wantId: Int? = null,
+        var account: String? = null,
+        var title: String? = null,
+        var description: String? = null
 )

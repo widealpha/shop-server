@@ -15,11 +15,11 @@ class CommodityController {
 
     @RequestMapping("/addCommodity")
     fun addCommodity(
-        title: String? = null,
-        description: String? = null,
-        price: Double? = null,
-        category: String? = null,
-        image: String? = null
+            title: String? = null,
+            description: String? = null,
+            price: Double? = null,
+            category: String? = null,
+            image: String? = null
     ): ResultEntity {
         val commodityRecord = CommodityRecord(null, title, description, price, category, image)
         return commodityService.addCommodity(commodityRecord)
@@ -41,7 +41,7 @@ class CommodityController {
     }
 
     @RequestMapping("/deleteMyCommodity")
-    fun deleteMyCommodity(commodityId: Int):ResultEntity{
+    fun deleteMyCommodity(commodityId: Int): ResultEntity {
         return commodityService.deleteCommodity(commodityId)
     }
 
